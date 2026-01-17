@@ -1,8 +1,8 @@
 # AI Code Review Assignment (Python)
 
 ## Candidate
-- Name:
-- Approximate time spent:
+- Name: Natnael Tilahun
+- Approximate time spent: 1 hour
 
 ---
 
@@ -35,7 +35,7 @@ See `correct_task1.py`
 
 > Note: The original AI-generated code is preserved in `task1.py`.
 
- ### Testing Considerations
+### Testing Considerations
 If you were to test this function, what areas or scenarios would you focus on, and why?
 - **Empty List**: Ensure it returns `0.0` and doesn't crash.
 - **Only Cancelled Orders**: Ensure it returns `0.0` (as the denominator for valid orders would be 0).
