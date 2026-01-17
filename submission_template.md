@@ -10,25 +10,36 @@
 
 ## 1) Code Review Findings
 ### Critical bugs
-- 
+- **ZeroDivisionError**: If the `orders` list is empty, `count = len(orders)` is 0, leading to a division by zero error in `total / count`.
+- **Logic Error in Denominator**: The `count` used for division includes all orders (including cancelled ones), but the `total` only sums non-cancelled orders. This results in an incorrect average.
 
 ### Edge cases & risks
-- 
+- **All Orders Cancelled**: If all orders are cancelled, the function will still divide by the total count, returning 0.0 only by chance if total is 0, but the logic remains flawed as it should divide by the number of orders considered.
+- **Missing Keys**: If an order dictionary is missing the "status" or "amount" key, the function will raise a `KeyError`.
+- **Incorrect Average Concept**: Averaging non-cancelled orders over the total count of orders (including cancelled) is statistically misleading for "Average Order Value".
 
 ### Code quality / design issues
-- 
+- **Variable Reuse**: The reliance on `len(orders)` at the start makes the function fragile to filtering logic changes.
+- **Missing Docstring**: The function lacks documentation on its expected input format and return behavior.
 
 ## 2) Proposed Fixes / Improvements
 ### Summary of changes
-- 
+- Added a check for empty input to return `0.0` early.
+- Implemented filtering of non-cancelled orders into a new list.
+- Changed the calculation to divide the sum of valid order amounts by the count of non-cancelled orders only.
+- Used `.get()` for safe dictionary access to avoid `KeyError`.
+- Added a proper docstring.
 
 ### Corrected code
 See `correct_task1.py`
 
 > Note: The original AI-generated code is preserved in `task1.py`.
 
- ### Testing Considerations
-If you were to test this function, what areas or scenarios would you focus on, and why?
+### Testing Considerations
+- **Empty List**: Ensure it returns `0.0` and doesn't crash.
+- **Only Cancelled Orders**: Ensure it returns `0.0` (as the denominator for valid orders would be 0).
+- **Mixed Statuses**: Verify the average is calculated correctly using only non-cancelled orders.
+- **Missing Data**: Test with orders missing the `status` or `amount` keys to ensure robustness.
 
 
 ## 3) Explanation Review & Rewrite
