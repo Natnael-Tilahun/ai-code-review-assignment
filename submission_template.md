@@ -35,7 +35,8 @@ See `correct_task1.py`
 
 > Note: The original AI-generated code is preserved in `task1.py`.
 
-### Testing Considerations
+ ### Testing Considerations
+If you were to test this function, what areas or scenarios would you focus on, and why?
 - **Empty List**: Ensure it returns `0.0` and doesn't crash.
 - **Only Cancelled Orders**: Ensure it returns `0.0` (as the denominator for valid orders would be 0).
 - **Mixed Statuses**: Verify the average is calculated correctly using only non-cancelled orders.
